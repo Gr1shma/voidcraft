@@ -1,0 +1,12 @@
+TODO.md
+
+.DS_Store
+*.swp
+*.swo
+*~
+
+*.local
+.env
+
+/tmp-builds/
+*.log
