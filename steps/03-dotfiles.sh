@@ -7,7 +7,7 @@ if [ -d "$DOTFILES_DIR" ]; then
 else
     log "Setting up dotfiles from mangodots repository..."
     cd "$HOME"
-    git clone --separate-git-dir="$DOTFILES_DIR" https://github.com/Gr1shma/mangodots.git tmpdotfiles
+    git clone --separate-git-dir="$DOTFILES_DIR" https://github.com/Gr1shma/prometheus.git tmpdotfiles
     rsync --recursive --exclude '.git' tmpdotfiles/ "$HOME"/
     rm -rf tmpdotfiles
 
