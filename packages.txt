@@ -126,8 +126,6 @@ shfmt
 zig
 nodejs
 pnpm
-rust
-cargo
 elixir
 python3-devel
 python3-pip

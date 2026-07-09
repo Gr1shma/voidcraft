@@ -3,6 +3,18 @@
 INSTALL_DIR="/tmp/void-custom-builds"
 mkdir -p "$INSTALL_DIR"
 
+# Rust toolchain
+log "Installing Rust toolchain..."
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- --quiet -y
+. "$HOME/.local/share/cargo/env"
+
+# grc
+log "Installing grc..."
+git clone https://github.com/Gr1shma/grc "$INSTALL_DIR/grc"
+cd "$INSTALL_DIR/grc"
+cargo install --path .
+cd "$HOME"
+
 # otter-launcher
 log "Building otter-launcher..."
 git clone https://github.com/kuokuo123/otter-launcher "$INSTALL_DIR/otter-launcher"
