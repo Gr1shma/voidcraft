@@ -5,13 +5,10 @@ DOTFILES_DIR="$HOME/.dotfiles"
 if [ -d "$DOTFILES_DIR" ]; then
     log "Dotfiles directory already exists, skipping clone"
 else
-    log "Setting up dotfiles from mangodots repository..."
-    cd "$HOME"
-    git clone --separate-git-dir="$DOTFILES_DIR" https://github.com/Gr1shma/prometheus.git tmpdotfiles
-    rsync --recursive --exclude '.git' tmpdotfiles/ "$HOME"/
-    rm -rf tmpdotfiles
-
-    git --git-dir="$DOTFILES_DIR" --work-tree="$HOME" config status.showUntrackedFiles no
+    log "Setting up dotfiles..."
+    git clone https://github.com/Gr1shma/voidrice.git "$DOTFILES_DIR"
+    cd "$DOTFILES_DIR"
+    stow --target=$HOME --adopt .
 fi
 
 NVIM_CONF_DIR="$HOME/.config/nvim"

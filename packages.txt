@@ -116,6 +116,7 @@ mesa-dri
 mesa-vaapi
 mesa-vulkan-intel
 psmic
+stow
 
 #dev
 go
