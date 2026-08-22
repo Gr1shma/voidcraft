@@ -23,3 +23,18 @@ if require_cmd nmcli; then
 fi
 
 log "Network configured, powersave disabled persistently"
+
+log "Configuring NetworkManager to manage /etc/resolv.conf..."
+as_root mkdir -p /etc/NetworkManager/conf.d
+printf "[main]\ndns=default\nrc-manager=symlink\n" | as_root tee /etc/NetworkManager/conf.d/dns.conf >/dev/null
+
+as_root sv restart NetworkManager
+sleep 3
+
+as_root ln -sf /run/NetworkManager/resolv.conf /etc/resolv.conf
+
+if [ -L /etc/resolv.conf ]; then
+    log "resolv.conf is now a symlink managed by NetworkManager"
+else
+    log "WARNING: /etc/resolv.conf is not a symlink — DNS config may need manual check"
+fi

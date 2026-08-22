@@ -29,7 +29,7 @@ cd voidcraft
 
 | # | Script | Does |
 |---|--------|------|
-| 0 | `00-network.sh` | Enable dbus/NetworkManager, disable Wi-Fi powersave |
+| 0 | `00-network.sh` | Enable dbus/NetworkManager, disable Wi-Fi powersave, configure NM to manage `/etc/resolv.conf` via symlink |
 | 1 | `01-dual-boot.sh` |  Detect dual boot, configure os-prober, regenerate GRUB  |
 | 2 | `02-packages.sh` | Add non-free/multilib/Blackhole repos, install `packages.txt` |
 | 3 | `03-dotfiles.sh` | Clone mangodots + NeoVim config |
