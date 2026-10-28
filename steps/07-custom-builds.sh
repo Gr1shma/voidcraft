@@ -8,30 +8,26 @@ log "Installing Rust toolchain..."
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- --quiet -y
 . "$HOME/.local/share/cargo/env"
 
-# grc
-log "Installing grc..."
-git clone https://github.com/Gr1shma/grc "$INSTALL_DIR/grc"
-cd "$INSTALL_DIR/grc"
-cargo install --path .
+# iji (bootstrap: installs itself)
+log "Installing iji..."
+git clone https://github.com/Gr1shma/iji "$INSTALL_DIR/iji"
+cd "$INSTALL_DIR/iji"
+cargo run --release -- i https://github.com/Gr1shma/iji
 cd "$HOME"
 
-# otter-launcher
-log "Building otter-launcher..."
-git clone https://github.com/kuokuo123/otter-launcher "$INSTALL_DIR/otter-launcher"
-cd "$INSTALL_DIR/otter-launcher"
-cargo build --release
-mkdir -p "$HOME/.config/otter-launcher"
-cp config_example/config.toml "$HOME/.config/otter-launcher/config.toml"
-as_root cp target/release/otter-launcher /usr/bin/otter-launcher
-cd "$HOME"
+command -v iji >/dev/null || {
+    log "iji not on PATH, add its install dir to PATH first"
+    exit 1
+}
 
-# wayfreeze
-log "Building wayfreeze..."
-git clone https://github.com/jappie3/wayfreeze "$INSTALL_DIR/wayfreeze"
-cd "$INSTALL_DIR/wayfreeze"
-cargo build --release
-as_root cp target/release/wayfreeze /usr/bin/wayfreeze
-cd "$HOME"
+log "Installing via iji..."
+iji i https://github.com/Gr1shma/grc
+iji i https://github.com/kuokuo123/otter-launcher
+iji i https://github.com/Mjoyufull/fsel
+iji i https://github.com/jappie3/wayfreeze
+iji i https://github.com/chrishrb/go-grip
+iji i https://github.com/mangowm/mangobar
+iji i https://github.com/2besita/nock
 
 # auto-cpufreq
 log "Installing auto-cpufreq..."
@@ -44,39 +40,9 @@ else
 fi
 cd "$HOME"
 
-# Linuwu-Sense kernel module
-log "Installing Linuwu-Sense kernel module..."
-LINUWU_DIR="$HOME/code/Linuwu-Sense"
-mkdir -p "$HOME/code"
-if [ ! -d "$LINUWU_DIR" ]; then
-    git clone https://github.com/0x7375646F/Linuwu-Sense "$LINUWU_DIR"
-fi
-if [ -d "$LINUWU_DIR" ]; then
-    cd "$LINUWU_DIR"
-    as_root make install
-    cd "$HOME"
-
-    # Deploy the runit service + shutdown hook from dotfiles config
-    LINUWU_CONF="$HOME/.config/linuwu-sense"
-    if [ -f "$LINUWU_CONF/install.sh" ]; then
-        log "Setting up Linuwu-Sense runit service..."
-        as_root sh "$LINUWU_CONF/install.sh"
-    fi
-else
-    log "Linuwu-Sense source not found at $LINUWU_DIR, skipping"
-fi
-
 # Zen Browser
 log "Installing Zen Browser..."
 curl -fsSL https://github.com/zen-browser/updates-server/raw/refs/heads/main/install.sh | $SHELL
-
-# pi coding agent
-log "Installing pi coding agent..."
-as_root npm install -g --ignore-scripts @earendil-works/pi-coding-agent
-
-# go-grip
-log "Installing go-grip..."
-go install github.com/chrishrb/go-grip@latest
 
 # JetBrains font
 mkdir -p ~/.local/share/fonts
