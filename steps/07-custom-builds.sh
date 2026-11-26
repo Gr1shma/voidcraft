@@ -40,9 +40,10 @@ else
 fi
 cd "$HOME"
 
-# Zen Browser
-log "Installing Zen Browser..."
-curl -fsSL https://github.com/zen-browser/updates-server/raw/refs/heads/main/install.sh | $SHELL
+# Helium Browser
+log "Installing Helium Browser..."
+HELIUM_REPO="https://github.com/VUP-Linux/vup/releases/download/browsers-x86_64-current"
+as_root xbps-install -y -R "$HELIUM_REPO" -S helium
 
 # JetBrains font
 mkdir -p ~/.local/share/fonts

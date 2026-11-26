@@ -26,6 +26,7 @@ pfetch
 ripgrep
 rsync
 shellcheck
+smem
 tmux
 tokei
 tree

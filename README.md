@@ -39,17 +39,6 @@ cd voidcraft
 | 7 | `07-custom-builds.sh` | Build tools not in xbps |
 | 99 | `99-cleanup.sh` | Clean bash configs, xbps cache, old kernels |
 
-## Custom Builds
-
-| Tool | Source |
-|------|--------|
-| `otter-launcher` | [kuokuo123/otter-launcher](https://github.com/kuokuo123/otter-launcher) |
-| `wayfreeze` | [jappie3/wayfreeze](https://github.com/jappie3/wayfreeze) |
-| `auto-cpufreq` | [AdnanHodzic/auto-cpufreq](https://github.com/AdnanHodzic/auto-cpufreq), cloned to `/tmp` and installed |
-| `Linuwu-Sense` | [0x7375646F/Linuwu-Sense](https://github.com/0x7375646F/Linuwu-Sense), cloned to `~/code` (kept for kernel rebuilds) |
-| `zen-browser` | Official tarball install script |
-
-
 ## Structure
 
 ```
